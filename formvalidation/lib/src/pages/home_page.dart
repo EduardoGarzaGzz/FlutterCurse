@@ -2,17 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:formvalidation/src/blocs/provider.dart';
 import 'package:formvalidation/src/models/producto_model.dart';
-import 'package:formvalidation/src/providers/productos_provider.dart';
 
 class HomePage extends StatelessWidget {
-  final productosProvider = ProductosProvider();
-
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of(context);
+    final productosBloc = Provider.productosBloc(context);
+    productosBloc.cargandoProductos();
+
     return Scaffold(
         appBar: AppBar(title: Text('Home page')),
-        body: this._crearListado(),
+        body: this._crearListado(productosBloc),
         floatingActionButton: this._crearBoton(context));
   }
 
@@ -24,15 +23,15 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _crearListado() {
-    return FutureBuilder(
-      future: this.productosProvider.cargarProductos(),
+  Widget _crearListado(ProductosBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.productosStream,
       builder: (BuildContext ctx, AsyncSnapshot<List<ProductoModel>> snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (ctx, idx) {
-              return this._crearItem(ctx, snapshot.data[idx]);
+              return this._crearItem(ctx, bloc, snapshot.data[idx]);
             },
           );
         } else {
@@ -44,14 +43,14 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _crearItem(BuildContext context, ProductoModel data) {
+  Widget _crearItem(BuildContext context, ProductosBloc bloc, ProductoModel data) {
     return Dismissible(
         key: UniqueKey(),
         background: Container(
           color: Colors.red,
         ),
         onDismissed: (dir) {
-          this.productosProvider.borrarProducto(data.id);
+          bloc.borrarProducto(data.id);
         },
         child: Card(
           child: Column(

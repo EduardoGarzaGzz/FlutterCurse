@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:formvalidation/src/blocs/provider.dart';
 import 'package:formvalidation/src/models/usuario_provider.dart';
-import 'package:formvalidation/src/utils/utils.dart' as utils;
 
-class LoginPage extends StatelessWidget {
+class RegistroPage extends StatelessWidget {
   final userProvider = UsuarioProvider();
 
   @override
@@ -116,7 +115,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  'Ingreso',
+                  'Crear cuenta',
                   style: TextStyle(fontSize: 20.0),
                 ),
                 SizedBox(
@@ -135,8 +134,8 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           FlatButton(
-            child: Text('Crear cuenta'),
-            onPressed: () => Navigator.pushReplacementNamed(context, 'registro'),
+            child: Text('¿Ya tienes cuenta?'),
+            onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
           ),
           SizedBox(
             height: 100.0,
@@ -208,17 +207,15 @@ class LoginPage extends StatelessWidget {
           elevation: 0.0,
           color: Colors.deepPurple,
           textColor: Colors.white,
-          onPressed: (!snapshot.hasData) ? null : () => this._login(bloc, context),
+          onPressed: (!snapshot.hasData) ? null : () => this._register(bloc, context),
         );
       },
     );
   }
 
-  _login(LoginBloc bloc, BuildContext context) async {
-    final info = await this.userProvider.login(bloc.email, bloc.password);
+  _register(LoginBloc bloc, BuildContext context) {
+    this.userProvider.nuevoUsuario(bloc.email, bloc.password);
 
-    if(info['ok']) Navigator.pushReplacementNamed(context, 'home');
-    else utils.mostrarAlerta(context, info['mensaje']);
-
+//    Navigator.pushReplacementNamed(context, 'home');
   }
 }
