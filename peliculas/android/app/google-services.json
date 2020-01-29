@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "923464269457",
+    "firebase_url": "https://flutter-varios-1b232.firebaseio.com",
+    "project_id": "flutter-varios-1b232",
+    "storage_bucket": "flutter-varios-1b232.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923464269457:android:2db68ee2fb89b574534930",
+        "android_client_info": {
+          "package_name": "com.elsheimus.flutterpeliculas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923464269457-fge1b147e9b9gmsengfulcps3fsoijho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH8YfAHGrCSTZfh3mLZ8hOJmKDbaaHJMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923464269457-fge1b147e9b9gmsengfulcps3fsoijho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
