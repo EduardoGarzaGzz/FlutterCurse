@@ -7,17 +7,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LiquidSwipe(
-        pages: liquidPages,
-        fullTransitionValue: 300,
-        enableLoop: true,
-        enableSlideIcon: true,
-        positionSlideIcon: 0.8,
-        waveType: WaveType.liquidReveal,
-        onPageChangeCallback: (page)=>  this._pageChangeCallback(page),
-        currentUpdateTypeCallback: (update) => this._updateTypeCallback(update),
-      )
-    );
+        body: LiquidSwipe(
+      pages: liquidPages,
+      fullTransitionValue: 300,
+      enableLoop: true,
+      enableSlideIcon: true,
+      positionSlideIcon: 0.8,
+      waveType: WaveType.liquidReveal,
+      onPageChangeCallback: (page) => this._pageChangeCallback(page),
+      currentUpdateTypeCallback: (update) => this._updateTypeCallback(update),
+    ));
   }
 
   _pageChangeCallback(int page) {}
