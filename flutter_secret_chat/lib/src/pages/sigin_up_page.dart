@@ -4,12 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secret_chat/src/widgets/circule_widgets.dart';
 import 'package:flutter_secret_chat/src/widgets/input_text.dart';
 
-class LoginPage extends StatefulWidget {
+class SingnUpPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SingnUpPageState createState() => _SingnUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SingnUpPageState extends State<SingnUpPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -97,6 +97,19 @@ class _LoginPageState extends State<LoginPage> {
                                     child: Column(
                                       children: <Widget>[
                                         InputText(
+                                          label: 'USERNAME',
+                                          inputType: TextInputType.text,
+                                          validator: (val) {
+                                            if (RegExp(r'^[a-zA-Z0-9]+$').hasMatch(val))
+                                              return null;
+                                            else
+                                              return 'Invalid username';
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        InputText(
                                           label: 'EMAIL ADDRESS',
                                           inputType: TextInputType.emailAddress,
                                           validator: (val) {
@@ -107,14 +120,16 @@ class _LoginPageState extends State<LoginPage> {
                                           },
                                         ),
                                         SizedBox(
-                                          height: 50,
+                                          height: 20,
                                         ),
                                         InputText(
                                           label: 'PASSWORD',
                                           isObscure: true,
                                           validator: (val) {
-                                            if(val.isNotEmpty && val.length > 5) return null;
-                                            else return 'Invalid password';
+                                            if (val.isNotEmpty && val.length > 5)
+                                              return null;
+                                            else
+                                              return 'Invalid password';
                                           },
                                         )
                                       ],
@@ -138,11 +153,11 @@ class _LoginPageState extends State<LoginPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    'New in friendly desi?',
+                                    'Already have an account?',
                                     style: TextStyle(fontSize: 16, color: Colors.black54),
                                   ),
                                   CupertinoButton(
-                                    onPressed: () => Navigator.pushReplacementNamed(context, 'singup'),
+                                    onPressed: () {},
                                     child: Text(
                                       'Sign up',
                                       style: TextStyle(fontSize: 16, color: Colors.pinkAccent),
@@ -158,6 +173,22 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ))),
+            Positioned(
+              left: 15,
+              top: 5,
+              child: SafeArea(
+                child: CupertinoButton(
+                  color: Colors.black12,
+                  padding: EdgeInsets.all(10),
+                  borderRadius: BorderRadius.circular(30),
+                  onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
